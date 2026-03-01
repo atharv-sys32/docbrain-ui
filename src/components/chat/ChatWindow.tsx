@@ -25,8 +25,8 @@ export default function ChatWindow({ messages, onSend, loading }: ChatWindowProp
   }, [messages, loading]);
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex flex-col h-full bg-white">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-20">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <MessageSquare size={48} className="mb-4" />

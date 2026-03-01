@@ -90,7 +90,7 @@ export default function CollectionPage() {
         </div>
       </div>
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden h-[calc(100vh-120px)]">
         <Sidebar
           collectionId={id!}
           onConversationSelect={handleConversationSelect}
@@ -98,14 +98,14 @@ export default function CollectionPage() {
           refreshTrigger={refreshTrigger}
         />
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0">
           {showUpload && (
-            <div className="p-4 border-b border-gray-200 bg-white">
+            <div className="p-4 border-b border-gray-200 bg-white flex-shrink-0">
               <FileUploader collectionId={id!} onUploadComplete={handleUploadComplete} />
             </div>
           )}
 
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden relative">
             <ChatWindow messages={messages} onSend={sendMessage} loading={loading} />
           </div>
         </div>
