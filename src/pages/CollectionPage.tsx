@@ -47,27 +47,27 @@ export default function CollectionPage() {
 
   if (!collection) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50">
         <Navbar />
-        <div className="text-center py-20 text-gray-400">Loading...</div>
+        <div className="text-center py-20 text-gray-400 text-lg">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50 flex flex-col">
       <Navbar />
 
-      <div className="border-b border-gray-200 bg-white px-6 py-3 flex items-center justify-between">
+      <div className="border-b border-gray-200/50 bg-white/70 backdrop-blur-sm px-6 py-3.5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/')}
-            className="text-gray-400 hover:text-gray-600 bg-transparent border-none cursor-pointer"
+            className="text-gray-400 hover:text-gray-600 bg-transparent border-none cursor-pointer transition-colors"
           >
             <ArrowLeft size={20} />
           </button>
           <div>
-            <h2 className="font-semibold text-gray-800">{collection.name}</h2>
+            <h2 className="font-bold text-gray-800 text-lg">{collection.name}</h2>
             {collection.description && (
               <p className="text-xs text-gray-500">{collection.description}</p>
             )}
@@ -76,14 +76,14 @@ export default function CollectionPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowUpload(!showUpload)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 border-none cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 border-none cursor-pointer font-medium transition-colors shadow-sm"
           >
             <Upload size={14} />
             Upload
           </button>
           <button
             onClick={handleDeleteCollection}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-500 hover:bg-red-50 rounded-lg bg-transparent border-none cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-xl bg-transparent border-none cursor-pointer transition-colors"
           >
             <Trash2 size={14} />
           </button>
@@ -100,7 +100,7 @@ export default function CollectionPage() {
 
         <div className="flex-1 flex flex-col min-w-0">
           {showUpload && (
-            <div className="p-4 border-b border-gray-200 bg-white flex-shrink-0">
+            <div className="p-4 border-b border-gray-200/50 bg-white/70 backdrop-blur-sm flex-shrink-0">
               <FileUploader collectionId={id!} onUploadComplete={handleUploadComplete} />
             </div>
           )}

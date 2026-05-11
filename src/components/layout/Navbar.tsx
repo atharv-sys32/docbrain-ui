@@ -12,17 +12,37 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-      <Link to="/" className="flex items-center gap-2 text-xl font-bold text-blue-600 no-underline">
-        <Brain size={28} />
-        DocBrain
+    <nav
+      style={{
+        backgroundColor: 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(226,232,240,0.6)',
+        padding: '14px 28px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+      }}
+    >
+      <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+        <Brain size={28} color="#2563eb" />
+        <span style={{ fontSize: '20px', fontWeight: 800, color: '#2563eb' }}>DocBrain</span>
       </Link>
       {user && (
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">{user.fullName || user.email}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#64748b' }}>{user.fullName || user.email}</span>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-red-500 bg-transparent border-none cursor-pointer"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '14px',
+              color: '#64748b',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+            }}
           >
             <LogOut size={16} />
             Logout

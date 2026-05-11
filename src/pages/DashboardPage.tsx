@@ -23,18 +23,31 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #ecfeff 0%, #eff6ff 50%, #f0fdfa 100%)' }}>
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-8">
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 32px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px' }}>
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Your Collections</h1>
-            <p className="text-gray-500 text-sm mt-1">Organize your documents into collections</p>
+            <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#1e293b' }}>Your Collections</h1>
+            <p style={{ color: '#64748b', marginTop: '6px', fontSize: '15px' }}>Organize your documents into collections</p>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm border-none cursor-pointer"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '14px 24px',
+              backgroundColor: '#2563eb',
+              color: '#fff',
+              borderRadius: '12px',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '15px',
+              boxShadow: '0 4px 14px rgba(37,99,235,0.3)',
+            }}
           >
             <Plus size={18} />
             New Collection
@@ -42,21 +55,45 @@ export default function DashboardPage() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-gray-400">Loading...</div>
+          <div style={{ textAlign: 'center', padding: '80px 0', color: '#94a3b8', fontSize: '16px' }}>Loading...</div>
         ) : collections.length === 0 ? (
-          <div className="text-center py-20">
-            <FolderOpen size={48} className="mx-auto text-gray-300 mb-4" />
-            <h3 className="text-lg font-medium text-gray-500">No collections yet</h3>
-            <p className="text-sm text-gray-400 mt-1">Create a collection to start uploading documents</p>
+          <div style={{ textAlign: 'center', padding: '100px 0' }}>
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                backgroundColor: '#eff6ff',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 24px',
+              }}
+            >
+              <FolderOpen size={40} color="#93c5fd" />
+            </div>
+            <h3 style={{ fontSize: '20px', fontWeight: 600, color: '#64748b' }}>No collections yet</h3>
+            <p style={{ color: '#94a3b8', marginTop: '8px' }}>Create a collection to start uploading documents</p>
             <button
               onClick={() => setShowModal(true)}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm border-none cursor-pointer"
+              style={{
+                marginTop: '24px',
+                padding: '14px 28px',
+                backgroundColor: '#2563eb',
+                color: '#fff',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '15px',
+                boxShadow: '0 4px 14px rgba(37,99,235,0.3)',
+              }}
             >
               Create your first collection
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
             {collections.map((c) => (
               <CollectionCard key={c.id} collection={c} />
             ))}

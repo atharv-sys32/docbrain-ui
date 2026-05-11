@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Link, Navigate } from 'react-router-dom';
-import { Brain } from 'lucide-react';
+import { Brain, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -27,58 +28,124 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md p-8">
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <Brain size={36} className="text-blue-600" />
-          <h1 className="text-3xl font-bold text-gray-800">DocBrain</h1>
-        </div>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #e0f7fa 0%, #e8f4f8 30%, #dff6f0 70%, #e0f2fe 100%)',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '48px' }}>
+        <Brain size={52} color="#2563eb" />
+        <span style={{ fontSize: '42px', fontWeight: 800, color: '#1e293b' }}>DocBrain</span>
+      </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-          <h2 className="text-xl font-semibold text-center mb-6">Sign In</h2>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '480px',
+          backgroundColor: 'rgba(255,255,255,0.95)',
+          borderRadius: '20px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
+          padding: '48px 40px',
+        }}
+      >
+        <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600, color: '#475569', marginBottom: '36px' }}>
+          Sign In
+        </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '20px' }}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email Address *"
+              required
+              style={{
+                width: '100%',
+                padding: '16px 18px',
+                border: '1.5px solid #d1d5db',
+                borderRadius: '12px',
+                fontSize: '16px',
+                outline: 'none',
+                backgroundColor: '#fff',
+                boxSizing: 'border-box',
+              }}
+            />
+          </div>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-
+          <div style={{ marginBottom: '24px', position: 'relative' }}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password *"
+              required
+              style={{
+                width: '100%',
+                padding: '16px 50px 16px 18px',
+                border: '1.5px solid #d1d5db',
+                borderRadius: '12px',
+                fontSize: '16px',
+                outline: 'none',
+                backgroundColor: '#fff',
+                boxSizing: 'border-box',
+              }}
+            />
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium border-none cursor-pointer"
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: 'absolute',
+                right: '16px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#9ca3af',
+              }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
-          </form>
+          </div>
 
-          <p className="text-center text-sm text-gray-500 mt-6">
-            Don't have an account?{' '}
-            <Link to="/register" className="text-blue-600 hover:underline">
-              Sign up
-            </Link>
-          </p>
-        </div>
+          {error && (
+            <p style={{ color: '#ef4444', fontSize: '14px', textAlign: 'center', marginBottom: '16px' }}>{error}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '16px',
+              backgroundColor: '#2563eb',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 700,
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+            }}
+          >
+            {loading ? 'Signing in...' : 'Login'}
+          </button>
+        </form>
+
+        <p style={{ textAlign: 'center', fontSize: '14px', color: '#94a3b8', marginTop: '28px' }}>
+          Don't have an account?{' '}
+          <Link to="/register" style={{ color: '#2563eb', fontWeight: 600, textDecoration: 'none' }}>
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );

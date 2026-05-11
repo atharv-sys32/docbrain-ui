@@ -25,7 +25,6 @@ export default function Sidebar({ collectionId, onConversationSelect, onNewChat,
     fetchData();
   }, [collectionId, refreshTrigger]);
 
-  // Poll for processing documents
   useEffect(() => {
     const hasProcessing = documents.some((d) => d.status === 'PROCESSING');
     if (!hasProcessing) return;
@@ -44,9 +43,9 @@ export default function Sidebar({ collectionId, onConversationSelect, onNewChat,
   };
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-full overflow-y-auto">
-      <div className="p-4 border-b border-gray-200">
-        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Documents</h3>
+    <div className="w-64 bg-white/70 backdrop-blur-sm border-r border-gray-200/50 flex flex-col h-full overflow-y-auto">
+      <div className="p-4 border-b border-gray-200/50">
+        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Documents</h3>
       </div>
       <div className="flex-1 overflow-y-auto">
         <div className="p-2">
@@ -54,20 +53,20 @@ export default function Sidebar({ collectionId, onConversationSelect, onNewChat,
             <p className="text-sm text-gray-400 p-2">No documents yet</p>
           ) : (
             documents.map((doc) => (
-              <div key={doc.id} className="flex items-center gap-2 p-2 text-sm rounded hover:bg-gray-50">
+              <div key={doc.id} className="flex items-center gap-2 p-2.5 text-sm rounded-lg hover:bg-blue-50/50 transition-colors">
                 <ProcessingStatus status={doc.status} />
-                <span className="truncate flex-1" title={doc.fileName}>{doc.fileName}</span>
+                <span className="truncate flex-1 text-gray-700" title={doc.fileName}>{doc.fileName}</span>
               </div>
             ))
           )}
         </div>
 
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200/50">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Chats</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Chats</h3>
             <button
               onClick={onNewChat}
-              className="p-1 text-blue-600 hover:bg-blue-50 rounded bg-transparent border-none cursor-pointer"
+              className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg bg-transparent border-none cursor-pointer transition-colors"
               title="New Chat"
             >
               <Plus size={16} />
@@ -80,13 +79,13 @@ export default function Sidebar({ collectionId, onConversationSelect, onNewChat,
               <div
                 key={conv.id}
                 onClick={() => onConversationSelect(conv.id)}
-                className="flex items-center gap-2 p-2 text-sm rounded hover:bg-gray-50 cursor-pointer group"
+                className="flex items-center gap-2 p-2.5 text-sm rounded-lg hover:bg-blue-50/50 cursor-pointer group transition-colors"
               >
                 <MessageSquare size={14} className="text-gray-400" />
-                <span className="truncate flex-1">{conv.title}</span>
+                <span className="truncate flex-1 text-gray-700">{conv.title}</span>
                 <button
                   onClick={(e) => handleDeleteConversation(e, conv.id)}
-                  className="opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 bg-transparent border-none cursor-pointer"
+                  className="opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 bg-transparent border-none cursor-pointer transition-all"
                 >
                   <Trash2 size={12} />
                 </button>
